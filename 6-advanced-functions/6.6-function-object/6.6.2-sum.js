@@ -21,3 +21,11 @@ console.log(JSON.parse(sum(1)(2)(3)))
 console.log(JSON.parse(sum(5)(-1)(2)))
 console.log(JSON.parse(sum(6)(-1)(-2)(-3)))
 console.log(JSON.parse(sum(0)(1)(2)(3)(4)(5)))
+
+//Однако, если использовать alert, можно обойтись и без него
+
+// alert(sum(1)(2))
+// alert(sum(1)(2)(3))
+// alert(sum(5)(-1)(2))
+// alert(sum(6)(-1)(-2)(-3))
+// alert(sum(0)(1)(2)(3)(4)(5))
