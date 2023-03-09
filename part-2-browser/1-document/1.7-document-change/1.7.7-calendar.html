@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      padding: 3px;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      background-color: #E6E6E6;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+  <div id="calendar"></div>
+
+  <script>
+    const createCalendar = (elem, year, month) => {
+      const getDay = (date) => {
+        let day = date.getDay();
+        day === 0 && (day = 7)
+        return day;
+      }
+
+      const table = document.createElement('table')
+      const currentDate = new Date(year, month - 1)
+      let tableData = ` 
+        <tr>
+          <th>пн</th>
+          <th>вт</th>
+          <th>ср</th>
+          <th>чт</th>
+          <th>пт</th>
+          <th>сб</th>
+          <th>вс</th>
+        </tr>
+        <tr>
+      `
+      console.log(getDay(currentDate));
+
+      for (let i = 1; i < getDay(currentDate); i++) {
+        tableData += '<td></td>';
+      }
+
+      while (currentDate.getMonth() === month - 1) {
+        tableData += `<td>${currentDate.getDate()}</td>`
+
+        if (getDay(currentDate) === 7) {
+          tableData += '</tr><tr>';
+        }
+
+        currentDate.setDate(currentDate.getDate() + 1)
+      }
+
+      if (getDay(currentDate) !== 1) {
+        for (let i = getDay(currentDate); i <= 7; i++) {
+          tableData += '<td></td>'
+        }
+      }
+
+      table.innerHTML = tableData
+      elem.append(table)
+    }
+
+    createCalendar(calendar, 2012, 9);
+  </script>
+
+</body>
+
+</html>

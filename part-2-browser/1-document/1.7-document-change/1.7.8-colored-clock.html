@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style type="text/css">
+    #clock {
+      margin-bottom: 10px;
+    }
+
+    .hours {
+      color: red;
+    }
+
+    .minutes {
+      color: green;
+    }
+
+    .seconds {
+      color: blue;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div id="clock">
+    <span class="hours">hh</span>:<span class="minutes">mm</span>:<span class="seconds">ss</span>
+  </div>
+
+  <!-- клик по этой кнопке вызовет clockStart() -->
+  <input type="button" onclick="clockStart()" value="Старт">
+
+  <!-- клик по этой кнопке вызовет clockStop() -->
+  <input type="button" onclick="clockStop()" value="Стоп">
+
+  <script>
+    let timerId
+
+    const clockUpdate = () => {
+      const date = new Date()
+
+      const hours = date.getHours()
+      document.querySelector('.hours').textContent = hours < 10 ? `0${hours}` : hours
+
+      const minutes = date.getMinutes()
+      document.querySelector('.minutes').textContent = minutes < 10 ? `0${minutes}` : minutes
+
+      const seconds = date.getSeconds()
+      document.querySelector('.seconds').textContent = seconds < 10 ? `0${seconds}` : seconds
+    }
+
+    const clockStart = () => {
+      timerId = setInterval(() => clockUpdate(), 1000);
+      clockUpdate()
+    }
+
+    const clockStop = () => {
+      clearInterval(timerId)
+    }
+  </script>
+</body>
+
+</html>

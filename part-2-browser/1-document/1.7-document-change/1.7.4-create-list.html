@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <body>
+    <h1>Создать список</h1>
+
+    <script>
+      const ul = document.createElement('ul')
+      document.body.append(ul)
+
+      const createList = () => {
+        const liName = prompt('Enter cell name')
+
+        if (!liName) {
+          return null
+        }
+
+        const li = document.createElement('li')
+        li.textContent = liName
+        ul.append(li)
+        return createList()
+      }
+
+      createList()
+    </script>
+  </body>
+</body>
+
+</html>

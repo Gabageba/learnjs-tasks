@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+  <div id="container"></div>
+
+  <!-- Результат должен быть:
+<div id="tree">
+<ul>
+  <li>Рыбы
+    <ul>
+      <li>форель</li>
+      <li>лосось</li>
+    </ul>
+  </li>
+  <li>Деревья
+    <ul>
+      <li>Огромные
+        <ul>
+          <li>секвойя</li>
+          <li>дуб</li>
+        </ul>
+      </li>
+      <li>Цветковые
+        <ul>
+          <li>яблоня</li>
+          <li>магнолия</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+-->
+
+  <!-- with container.innerHTML -->
+  <script>
+    let data = {
+      "Рыбы": {
+        "форель": {},
+        "лосось": {}
+      },
+
+      "Деревья": {
+        "Огромные": {
+          "секвойя": {},
+          "дуб": {}
+        },
+        "Цветковые": {
+          "яблоня": {},
+          "магнолия": {}
+        }
+      }
+    };
+
+    function createTree(container, data) {
+      container.innerHTML = objToTree(data)
+    }
+
+    function objToTree(obj) {
+      let li = ''
+
+      for (let key in obj) {
+        li += `<li>${key}${objToTree(obj[key])}</li>`
+      }
+
+      if (!li) {
+        return ''
+      }
+
+      return `<ul>${li}</ul>`
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+
+  <!-- with DOM -->
+  <script>
+    function createTree(container, data) {
+      container.append(objToTree(data))
+    }
+
+    function objToTree(obj) {
+      if (!Object.keys(obj).length) return
+
+      const ul = document.createElement('ul');
+
+      for (let key in obj) {
+        const currentLi = document.createElement('li')
+        currentLi.textContent = key
+
+        currentUl = objToTree(obj[key])
+        if (currentUl) {
+          currentLi.append(currentUl)
+        }
+
+        ul.append(currentLi)
+      }
+
+      return ul
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+
+</body>
+
+</html>
