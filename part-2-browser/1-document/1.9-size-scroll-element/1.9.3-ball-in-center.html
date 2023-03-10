@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    #field {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #ball {
+      position: absolute;
+    }
+
+  </style>
+</head>
+
+<body>
+
+
+  <div id="field">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball">
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    const ball = document.querySelector('#ball')
+    ballWidth = ball.offsetWidth
+    ballHeight = ball.offsetHeight
+
+    const field = document.querySelector('#field')
+    fieldWidth = field.clientWidth
+    fieldHeight = field.clientHeight
+
+    ball.style.left = Math.round((fieldWidth - ballWidth) / 2) + 'px'
+    ball.style.top = Math.round((fieldHeight - ballHeight) / 2) + 'px'
+  </script>
+</body>
+
+</html>
