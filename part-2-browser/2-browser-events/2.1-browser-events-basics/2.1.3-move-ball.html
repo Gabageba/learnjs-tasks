@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #field {
+      width: 200px;
+      height: 150px;
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #ball {
+      position: absolute;
+      transition: top 0.5s ease-in-out, left 0.5s ease-in-out;
+    }
+
+  </style>
+</head>
+
+<body style="height:2000px">
+
+  Нажмите на поле для перемещения мяча.
+  <br> Мяч не должен выходить за границы поля.
+
+
+  <div id="field">
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball">
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+  <script>
+    const field = document.querySelector('#field')
+
+    function moveBall(event) {
+      const ball = document.querySelector('#ball')
+      const fieldCoords = this.getBoundingClientRect()
+      const ballCoords = {
+        top: event.clientY - fieldCoords.top - field.clientTop - ball.clientHeight / 2,
+        left: event.clientX - fieldCoords.left - field.clientLeft - ball.clientWidth / 2,
+      }
+
+      ballCoords.top < 0 && (ballCoords.top = 0)
+      ballCoords.left < 0 && (ballCoords.left = 0)
+
+      if (ballCoords.top + ball.clientHeight > field.clientHeight) {
+        ballCoords.top = field.clientHeight - ball.clientHeight;
+      }
+
+      if (ballCoords.left + ball.clientWidth > field.clientWidth) {
+        ballCoords.left = field.clientWidth - ball.clientWidth;
+      }
+
+
+      ball.style.left = `${ballCoords.left}px`
+      ball.style.top = `${ballCoords.top}px`
+    }
+
+    field.addEventListener('click', moveBall)
+  </script>
+</body>
+
+</html>

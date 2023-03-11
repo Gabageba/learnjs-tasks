@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .burger-menu__title {
+      cursor: pointer;
+    }
+
+    .burger-menu__title::before {
+      content: '▶';
+      color: green;
+      margin-right: 5px;
+      width: 17px;
+      height: 17px;
+    }
+
+    .burger-menu.open .burger-menu__title::before {
+      content: '▼';
+    }
+
+    .burger-menu__list {
+      list-style: none;
+      margin: 0;
+      padding-left: 20px;
+      display: none;
+    }
+
+    .burger-menu.open .burger-menu__list {
+      display: block;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="burger-menu">
+    <span class='burger-menu__title'>Сладости (нажми меня)!</span>
+    <ul class='burger-menu__list'>
+      <li>Пирожное</li>
+      <li>Пончик</li>
+      <li>Мёд</li>
+    </ul>
+  </div>
+
+  <script>
+    document.querySelector('.burger-menu').onclick = function () {
+      this.classList.toggle('open')
+    }
+  </script>
+</body>
+
+</html>
