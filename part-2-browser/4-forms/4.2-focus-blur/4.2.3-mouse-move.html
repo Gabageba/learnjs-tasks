@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #mouse {
+      display: inline-block;
+      cursor: pointer;
+      margin: 0;
+    }
+
+    #mouse:focus {
+      outline: 1px dashed black;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <p>Кликните по "изображению" мыши и перемещайте её с помощью клавиш со стрелками.</p>
+
+  <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+</pre>
+
+
+  <script>
+    const mouse = document.querySelector('#mouse')
+    mouse.tabIndex = 0
+
+    mouse.addEventListener('click', (event) => {
+      const mousePosition = event.target.getBoundingClientRect()
+      event.target.style.position = 'fixed';
+      event.target.style.top = mousePosition.top + 'px'
+      event.target.style.left = mousePosition.left + 'px'
+
+      event.target.addEventListener('keydown', toggleKeyPress)
+    })
+
+    mouse.addEventListener('blur', (event) => {
+      event.target.removeEventListener('keydown', toggleKeyPress)
+    })
+
+    function toggleKeyPress(event) {
+      const mousePosition = this.getBoundingClientRect()
+      let topShift = 0
+      let leftShift = 0
+      switch (event.keyCode) {
+        case 38:
+        case 87:
+          topShift = mousePosition.top - this.offsetHeight
+          if (topShift < 0) topShift = 0
+          this.style.top = topShift + 'px'
+          break;
+
+        case 37:
+        case 65:
+          leftShift = mousePosition.left - this.offsetWidth
+          if (leftShift < 0) leftShift = 0
+          this.style.left = leftShift + 'px'
+          break;
+
+        case 40:
+        case 83:
+          topShift = mousePosition.top + this.offsetHeight
+          if (topShift >= document.documentElement.clientHeight - this.offsetHeight) {
+            topShift = document.documentElement.clientHeight - this.offsetHeight
+          }
+          this.style.top = topShift + 'px'
+          break;
+
+        case 39:
+        case 68:
+          leftShift = mousePosition.left + this.offsetWidth
+          if (leftShift >= document.documentElement.clientWidth - this.offsetWidth) {
+            leftShift = document.documentElement.clientWidth - this.offsetWidth
+          }
+          this.style.left = leftShift + 'px'
+          break;
+        default:
+          break;
+      }
+    }
+  </script>
+
+</body>
+
+</html>
