@@ -1,0 +1,27 @@
+<!doctype html>
+<script src="https://ru.js.cx/test/libs.js"></script>
+<script src="test.js"></script>
+<script>
+
+  async function getUsers(names) {
+    let users = []
+    for (let name of names) {
+      const user = fetch(`https://api.github.com/users/${name}`)
+        .then(response => {
+          if (response.status === 200) {
+            return response.json()
+          } else {
+            return null
+          }
+        })
+        .catch(() => null)
+
+      users.push(user)
+    }
+
+    return await Promise.all(users)
+  }
+
+</script>
+
+</html>
