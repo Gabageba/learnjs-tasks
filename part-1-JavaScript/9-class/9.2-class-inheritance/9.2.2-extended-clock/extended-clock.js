@@ -1,7 +1,7 @@
 class ExtendedClock extends Clock {
-  constructor(options) {
-    super(options)
-    let { precision = 1000 } = options
+  constructor({ template, precision }) {
+    super({ template })
+    // let { precision = 1000 } = options
     this.precision = precision
   }
 
